@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết sản phẩm - Watch Store</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #0b0b0b;
+        --accent-color: #d4af37; /* Rich gold color */
+        --text-color: #1a1a1a;
+        --secondary-color: #f5f5f5;
+      }
+
+      body {
+        font-family: "Roboto", "Arial", sans-serif;
+        color: var(--text-color);
+        background-color: var(--secondary-color);
+      }
+
+      .product-details {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .product-main-image {
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: all 0.4s ease;
+      }
+
+      .thumbnail-image {
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.6s ease;
+        filter: brightness(0.9);
+      }
+
+      .thumbnail-image:hover {
+        transform: scale(1.05);
+      }
+
+      .product-title {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-bottom: 1rem;
+      }
+
+      .product-price {
+        color: var(--accent-color);
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 15px 0;
+      }
+
+      .btn-custom {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      }
+
+      .btn-custom:hover {
+        background-color: var(--primary-color);
+        color: var(--accent-color);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+      }
+
+      .specs-table {
+        width: 100%;
+        margin-top: 1rem;
+      }
+
+      .specs-table tr {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .specs-table td {
+        padding: 1rem 0;
+      }
+
+      .specs-table td:first-child {
+        font-weight: 500;
+        color: var(--primary-color);
+        width: 30%;
+      }
+
+      .quantity-input {
+        width: 100px;
+        text-align: center;
+        margin: 0 10px;
+        border-radius: 25px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      /* Nút tăng giảm số lượng */
+      .btn-outline-secondary {
+        border-radius: 25px;
+        border: 1px solid var(--accent-color);
+        color: var(--accent-color);
+        transition: all 0.3s ease;
+      }
+
+      .btn-outline-secondary:hover {
+        background-color: var(--accent-color);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .product-card {
+        border: 1px solid #eee;
+        transition: all 0.3s;
+        margin-bottom: 20px;
+      }
+
+      .product-card:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-image img {
+        width: 100%;
+        transition: transform 0.3s;
+      }
+
+      .product-card:hover .product-image img {
+        transform: scale(1.05);
+      }
+
+      .product-action {
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        text-align: center;
+        transition: bottom 0.3s;
+      }
+
+      .product-card:hover .product-action {
+        bottom: 0;
+      }
+
+      .btn-view {
+        display: inline-block;
+        padding: 8px 20px;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background 0.3s;
+      }
+
+      .btn-view:hover {
+        background: #0056b3;
+        color: white;
+      }
+
+      .product-info {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .product-title-sameproduct {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .product-price-sameproduct {
+        font-size: 18px;
+        color: var(--accent-color);
+        font-weight: bold;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="product-details mb-5">
+        <div class="row">
+          <!-- Ảnh sản phẩm -->
+          <div class="col-md-6">
+            <img
+              src="https://www.watchstore.vn/images/products/others/2024/large/nh8350-59l-1-834858534-969399190-1712554639.webp"
+              class="img-fluid product-main-image"
+              alt="Watch"
+            />
+            <div class="row g-2">
+              <div class="col-3">
+                <img
+                  src="https://www.watchstore.vn/images/products/others/2024/large/nh8350-59l-1-834858534-969399190-1712554639.webp"
+                  class="img-fluid thumbnail-image"
+                  alt="Watch thumbnail"
+                />
+              </div>
+              <div class="col-3">
+                <img
+                  src="https://www.watchstore.vn/images/products/2024/resized/nh8350-59e-1712483070.webp"
+                  class="img-fluid thumbnail-image"
+                  alt="Watch thumbnail"
+                />
+              </div>
+              <div class="col-3">
+                <img
+                  src="https://www.watchstore.vn/images/products/others/2024/large/nh8350-59l-1-834858534-969399190-1712554639.webp"
+                  class="img-fluid thumbnail-image"
+                  alt="Watch thumbnail"
+                />
+              </div>
+              <div class="col-3">
+                <img
+                  src="https://www.watchstore.vn/images/products/others/2024/large/nh8350-59l-1-834858534-969399190-1712554639.webp"
+                  class="img-fluid thumbnail-image"
+                  alt="Watch thumbnail"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Thông tin sản phẩm -->
+          <div class="col-md-6">
+            <h1 class="product-title">Đồng Hồ Citizen - Nam NH8350-59L</h1>
+            <p class="product-price">4.948.000đ</p>
+
+            <div class="mb-4">
+              <h5 class="mb-3">Số lượng:</h5>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-outline-secondary">-</button>
+                <input
+                  type="number"
+                  class="form-control quantity-input"
+                  value="1"
+                  min="1"
+                />
+                <button class="btn btn-outline-secondary">+</button>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button class="btn btn-custom">
+                <i class="fas fa-shopping-cart me-2"></i>Thêm vào giỏ hàng
+              </button>
+              <button class="btn btn-custom">
+                <i class="fas fa-bolt me-2"></i>Mua ngay
+              </button>
+            </div>
+
+            <table class="specs-table mt-4">
+              <tr>
+                <td>Thương hiệu</td>
+                <td>Citizen</td>
+              </tr>
+              <tr>
+                <td>Model</td>
+                <td>NH8350-59L</td>
+              </tr>
+              <tr>
+                <td>Xuất xứ</td>
+                <td>Nhật Bản</td>
+              </tr>
+              <tr>
+                <td>Bảo hành</td>
+                <td>12 tháng</td>
+              </tr>
+              <tr>
+                <td>Chất liệu</td>
+                <td>Thép không gỉ</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Mô tả chi tiết -->
+        <div class="row mt-5">
+          <div class="col-12">
+            <h3 class="mb-4">Mô tả sản phẩm</h3>
+            <p>
+              Đồng hồ Citizen NH8350-59L là một chiếc đồng hồ cơ tự động thuộc
+              dòng sản phẩm mechanical của Citizen. Sản phẩm sở hữu kiểu dáng
+              thanh lịch với mặt số màu xanh đặc trưng cùng vỏ và dây đeo được
+              làm từ thép không gỉ 316L cao cấp.
+            </p>
+            <p>Đặc điểm nổi bật:</p>
+            <ul>
+              <li>Bộ máy cơ tự động</li>
+              <li>Mặt kính cứng chống trầy</li>
+              <li>Chống nước 50m</li>
+              <li>Dự trữ năng lượng 40 giờ</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sản phẩm cùng loại -->
+        <div class="row mt-5">
+          <div class="col-12">
+            <h3 class="mb-4">Sản phẩm cùng loại</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Product Card 1 -->
+          <div class="col-md-3 col-6 mb-4">
+            <div class="product-card">
+              <div class="product-image">
+                <img
+                  src="https://www.watchstore.vn/images/products/others/2024/large/au1062-56e-112015096-579722830-1712554890.webp"
+                  class="img-fluid"
+                  alt="Watch 1"
+                />
+                <div class="product-action">
+                  <a href="#" class="btn-view">Xem chi tiết</a>
+                </div>
+              </div>
+              <div class="product-info">
+                <h5 class="product-title-sameproduct">Citizen NK5000-98E</h5>
+                <p class="product-price-sameproduct">4,500,000 ₫</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Card 2 -->
+          <div class="col-md-3 col-6 mb-4">
+            <div class="product-card">
+              <div class="product-image">
+                <img
+                  src="https://www.watchstore.vn/images/products/others/2024/large/au1062-56e-112015096-579722830-1712554890.webp"
+                  class="img-fluid"
+                  alt="Watch 2"
+                />
+                <div class="product-action">
+                  <a href="#" class="btn-view">Xem chi tiết</a>
+                </div>
+              </div>
+              <div class="product-info">
+                <h5 class="product-title-sameproduct">Citizen NJ0150-81L</h5>
+                <p class="product-price-sameproduct">5,200,000 ₫</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Card 3 -->
+          <div class="col-md-3 col-6 mb-4">
+            <div class="product-card">
+              <div class="product-image">
+                <img
+                  src="https://www.watchstore.vn/images/products/others/2024/large/au1062-56e-112015096-579722830-1712554890.webp"
+                  class="img-fluid"
+                  alt="Watch 3"
+                />
+                <div class="product-action">
+                  <a href="#" class="btn-view">Xem chi tiết</a>
+                </div>
+              </div>
+              <div class="product-info">
+                <h5 class="product-title-sameproduct">Citizen NH8390-71L</h5>
+                <p class="product-price-sameproduct">4,800,000 ₫</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Card 4 -->
+          <div class="col-md-3 col-6 mb-4">
+            <div class="product-card">
+              <div class="product-image">
+                <img
+                  src="https://www.watchstore.vn/images/products/others/2024/large/au1062-56e-112015096-579722830-1712554890.webp"
+                  class="img-fluid"
+                  alt="Watch 4"
+                />
+                <div class="product-action">
+                  <a href="#" class="btn-view">Xem chi tiết</a>
+                </div>
+              </div>
+              <div class="product-info">
+                <h5 class="product-title-sameproduct">Citizen NB1050-59L</h5>
+                <p class="product-price-sameproduct">6,100,000 ₫</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
