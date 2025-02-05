@@ -1,0 +1,36 @@
+package poly.edu.entity;
+
+import java.io.Serializable;
+import jakarta.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "cart_detail")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CartDetailEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id", nullable = false)
+    private CartEntity cart;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private ProductEntity product;
+
+    @Column(name = "qty", nullable = false)
+    private int qty;
+
+    @Column(name = "price", nullable = false)
+    private float price;
+}
