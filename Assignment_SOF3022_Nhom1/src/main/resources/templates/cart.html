@@ -15,7 +15,7 @@
     <style>
       :root {
         --primary-color: #0b0b0b;
-        --accent-color: #d4af37;
+        --accent-color: #e74c3c;
         --text-color: #1a1a1a;
         --secondary-color: #f5f5f5;
       }
@@ -77,8 +77,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 25px;
-        border: 1px solid var(--accent-color);
-        color: var(--accent-color);
+        border: 1px solid var(--text-color);
         transition: all 0.3s ease;
       }
 
@@ -126,7 +125,7 @@
       }
 
       .summary-item span:last-child {
-        color: var(--accent-color);
+        color: var(--text-color);
         font-weight: 500;
       }
 
@@ -159,8 +158,8 @@
       }
 
       .product-price {
-        color: var(--accent-color);
-        font-size: 1.4rem;
+        color: var(--text-color);
+        font-size: 1.3rem;
         font-weight: 500;
         margin: 15px 0;
       }
@@ -368,7 +367,9 @@
 
             <div class="summary-item">
               <strong>Tổng cộng:</strong>
-              <span class="product-price h4">9.426.000đ</span>
+              <span class="product-price h4" style="font-weight: bold"
+                >9.426.000đ</span
+              >
             </div>
 
             <button class="btn-checkout mt-3">
