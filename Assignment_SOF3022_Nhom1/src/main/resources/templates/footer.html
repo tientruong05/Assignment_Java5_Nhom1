@@ -2,9 +2,10 @@
 <html>
 <head>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     .footer-area {
-      background-color: #1a1a1a;
+      background-color: #0a0a0a;
       color: #ffffff;
       padding: 60px 0 0;
     }
@@ -25,7 +26,7 @@
       bottom: -8px;
       width: 50px;
       height: 2px;
-      background: #007bff;
+      background: #d4af37; /* Màu vàng sang trọng */
     }
     
     .ft__list {
@@ -45,7 +46,7 @@
     }
     
     .ft__list li a:hover {
-      color: #ffffff;
+      color: #d4af37; /* Màu vàng sang trọng */
       padding-left: 5px;
     }
     
@@ -69,18 +70,18 @@
     .news__input .btn {
       margin-top: 10px;
       padding: 10px 25px;
-      background-color: #007bff;
+      background-color: #d4af37; /* Màu vàng sang trọng */
       border: none;
       transition: all 0.3s ease;
     }
     
     .news__input .btn:hover {
-      background-color: #0056b3;
+      background-color: #b89329; /* Màu vàng đậm hơn */
       transform: translateY(-2px);
     }
     
     .htc__copyright {
-      background-color: #111111;
+      background-color: #000000;
       padding: 20px 0;
     }
     
@@ -90,13 +91,36 @@
     }
     
     .copyright__inner a {
-      color: #007bff;
+      color: #d4af37; /* Màu vàng sang trọng */
       text-decoration: none;
       transition: all 0.3s ease;
     }
     
     .copyright__inner a:hover {
       color: #ffffff;
+    }
+    
+    .social-links {
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-right: 10px;
+      text-align: center;
+      line-height: 35px;
+      border-radius: 50%;
+      color: #a8a8a8;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: #d4af37;
+      color: #ffffff;
+      transform: translateY(-3px);
     }
     
     @media (max-width: 768px) {
@@ -112,37 +136,53 @@
       <div class="row justify-content-between">
         <div class="col-md-3 col-sm-6 mb-4">
           <div class="footer">
+            <h2 class="title__line--2">VỀ CHÚNG TÔI</h2>
+            <ul class="ft__list">
+              <li><a href="#">Giới thiệu về WatchStore</a></li>
+              <li><a href="#">Phản ánh - Khiếu nại</a></li>
+              <li><a href="#">Chính sách bảo hành</a></li>
+              <li><a href="#">Điều khoản thanh toán</a></li>
+            </ul>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="footer">
             <h2 class="title__line--2">TÀI KHOẢN KHÁCH</h2>
             <ul class="ft__list">
               <li><a href="#">Tài Khoản</a></li>
               <li><a href="cart.html">Đơn Hàng</a></li>
-              <li><a href="wishlist.html">Danh Sách Mơ Ước</a></li>
+              <li><a href="wishlist.html">Danh Sách Yêu Thích</a></li>
               <li><a href="checkout.html">Thanh Toán</a></li>
             </ul>
           </div>
         </div>
         <div class="col-md-3 col-sm-6 mb-4">
           <div class="footer">
-            <h2 class="title__line--2">Dịch Vụ Của Chúng Tôi</h2>
+            <h2 class="title__line--2">LIÊN HỆ HỖ TRỢ</h2>
             <ul class="ft__list">
-              <li><a href="#">Tài Khoản</a></li>
-              <li><a href="cart.html">Đơn Hàng</a></li>
-              <li><a href="wishlist.html">Danh Sách Mơ Ước</a></li>
-              <li><a href="checkout.html">Thanh Toán</a></li>
+              <li>Hotline 1: 093 189 2222</li>
+              <li>Hotline 2: 097 189 3333</li>
             </ul>
           </div>
         </div>
-        <div class="col-md-4 col-sm-6 mb-4">
+        <div class="col-md-3 col-sm-6 mb-4">
           <div class="footer">
-            <h2 class="title__line--2">GỬI EMAIL</h2>
+            <h2 class="title__line--2">ĐĂNG KÝ NHẬN TIN</h2>
             <div class="news__input">
               <input
                 type="email"
                 placeholder="Địa Chỉ Email*"
                 class="form-control bg-transparent"
               />
-              <button class="btn btn-primary">Gửi</button>
+              <button class="btn btn-primary">Đăng Ký</button>
             </div>
+            <p class="text-muted mt-3">Nhận thông tin mới nhất về sản phẩm và khuyến mãi.</p>
           </div>
         </div>
       </div>
@@ -153,11 +193,7 @@
           <div class="col-12 text-center">
             <div class="copyright__inner">
               <p>
-                Copyright © 
-                <a href="https://freethemescloud.com/">
-                  Free Themes Cloud
-                </a>
-                2025. All rights reserved.
+                © 2025 DinoStore.vn - Đồng hồ chính hãng | All rights reserved
               </p>
             </div>
           </div>
