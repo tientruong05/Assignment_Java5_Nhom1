@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,8 +67,8 @@
       }
 
       .btn-custom {
-        background-color: var(--accent-color);
-        color: white;
+        background-color: #e74c3c;
+        color: black;
         border: none;
         padding: 12px 25px;
         border-radius: 25px;
@@ -76,14 +76,14 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         font-size: 0.9rem;
-        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        /*box-shadow: 0 4px 15px #e74c3c;*/
       }
 
       .btn-custom:hover {
-        background-color: var(--primary-color);
-        color: var(--accent-color);
+        background-color: #e74c3c;
+        color: white;
         transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+       /* box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);*/
       }
 
       .specs-table {
@@ -169,7 +169,7 @@
       .btn-view {
         display: inline-block;
         padding: 8px 20px;
-        background: #007bff;
+        background: #e74c3c;
         color: white;
         text-decoration: none;
         border-radius: 4px;
@@ -177,7 +177,7 @@
       }
 
       .btn-view:hover {
-        background: #0056b3;
+        background: #d13d2e;
         color: white;
       }
 

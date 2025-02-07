@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}" lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Quản lý sản phẩm</title>
@@ -24,6 +24,20 @@
         object-fit: cover;
         border-radius: 5px;
       }
+      
+      table thead tr th{
+        	background-color: #e74c3c !important;
+        	color:white !important;
+        	text-align: center;
+        }
+        
+        tbody td{
+        	border: #e74c3c 1px solid ;
+        }
+       tbody tr:nth-child(n+2) {
+    background-color: #fca89f ;
+}
+      
     </style>
   </head>
   <body class="bg-light">
@@ -43,7 +57,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>STT</th>
               <th>Ảnh</th>
               <th>Tên sản phẩm</th>
               <th>Giá</th>
@@ -56,7 +70,7 @@
           <tbody>
             <tr>
               <td>1</td>
-              <td><img src="watch-image.jpg" class="product-image" /></td>
+              <td><img src="/photos/mau-1.webp" class="product-image" /></td>
               <td>Đồng hồ Citizen</td>
               <td>4,948,000đ</td>
               <td>10</td>

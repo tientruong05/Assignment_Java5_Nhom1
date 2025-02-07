@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}" lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Quản lý người dùng</title>
@@ -18,6 +18,19 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         padding: 20px;
       }
+      table thead tr th{
+        	background-color: #e74c3c !important;
+        	color:white !important;
+        	text-align: center;
+        }
+        
+        tbody td{
+        	border: #e74c3c 1px solid ;
+        }
+       tbody tr:nth-child(n+2) {
+    background-color: #fca89f ;
+}
+      
     </style>
   </head>
   <body class="bg-light">
@@ -37,7 +50,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>STT</th>
               <th>Tên đăng nhập</th>
               <th>Email</th>
               <th>Họ tên</th>

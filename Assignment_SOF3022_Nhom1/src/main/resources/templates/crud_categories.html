@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}" lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Quản lý loại sản phẩm</title>
@@ -30,6 +30,20 @@
         background: #e74c3c;
         color: white;
       }
+      
+      table thead tr th{
+        	background-color: #e74c3c !important;
+        	color:white !important;
+        	text-align: center;
+        }
+        
+        tbody td{
+        	border: #e74c3c 1px solid ;
+        }
+       tbody tr:nth-child(n+2) {
+    background-color: #fca89f ;
+}
+      
     </style>
   </head>
   <body class="bg-light">
@@ -49,7 +63,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>STT</th>
               <th>Tên loại</th>
               <th>Trạng thái</th>
               <th>Thao tác</th>
@@ -58,7 +72,7 @@
           <tbody>
             <tr>
               <td>1</td>
-              <td>Đồng hồ nam</td>
+              <td>Versace</td>
               <td>Hoạt động</td>
               <td>
                 <button

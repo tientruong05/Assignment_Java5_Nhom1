@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}">
+<head>
+    <title>Thống kê 10 khách hàng VIP</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        table {
+            width: 99%;
+            border-collapse: collapse;
+            margin:5px 10px;
+        }
+
+        table thead tr th{
+        	background-color: #e74c3c !important;
+        	color:white !important;
+        	text-align: center;
+        }
+        
+        tbody td{
+        	border: #e74c3c 1px solid ;
+        }
+       tbody tr:nth-child(2n) {
+    background-color: #fca89f ;
+}
+h1{
+		text-align:center;
+		}
+        .loc {
+            margin: 10px auto;
+            padding-right:50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thống kê 10 khách hàng VIP</h1>
+    <div class="loc">
+    <label for="year">Năm:</label>
+    <select id="year">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        </select>
+    <label for="month">Tháng:</label>
+    <select id="month">
+        <option value="">-- Chọn tháng --</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        </select>
+    <button onclick="filterCustomers()">Lọc</button>
+    </div>
+    <table id="vip-customers">
+        <thead>
+            <tr>
+                <th>Tên khách hàng</th>
+                <th>Tổng tiền đã mua</th>
+                <th>Ngày mua đầu tiên</th>
+                <th>Ngày mua cuối cùng</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
+    <script>
+        const customerData = [
+            { name: "Huỳnh Phúc Khang", totalSpent: 15000000, firstPurchase: "2023-01-15", lastPurchase: "2023-12-20" },
+            { name: "Trương Minh Tiến", totalSpent: 12000000, firstPurchase: "2023-03-10", lastPurchase: "2023-11-25" },
+            { name: "Nguyễn Thị Bảo Ly", totalSpent: 10000000, firstPurchase: "2023-05-05", lastPurchase: "2023-10-30" },
+            { name: "Trần Thị Yến Nhi", totalSpent: 9000000, firstPurchase: "2023-01-07", lastPurchase: "2023-10-30" }
+            // ... Thêm dữ liệu khách hàng khác
+        ];
+
+        function displayVipCustomers(customers) {
+            const tableBody = document.querySelector("#vip-customers tbody");
+            tableBody.innerHTML = ""; // Xóa dữ liệu cũ
+
+            customers.forEach(customer => {
+                const row = tableBody.insertRow();
+                const nameCell = row.insertCell();
+                const totalSpentCell = row.insertCell();
+                const firstPurchaseCell = row.insertCell();
+                const lastPurchaseCell = row.insertCell();
+
+                nameCell.textContent = customer.name;
+                totalSpentCell.textContent = customer.totalSpent.toLocaleString() + " VNĐ";
+                firstPurchaseCell.textContent = customer.firstPurchase;
+                lastPurchaseCell.textContent = customer.lastPurchase;
+            });
+        }
+
+        function filterCustomers() {
+            const year = document.getElementById("year").value;
+            const month = document.getElementById("month").value;
+
+            let filteredCustomers = customerData.filter(customer => {
+                const firstPurchaseYear = customer.firstPurchase.slice(0, 4);
+                const lastPurchaseYear = customer.lastPurchase.slice(0, 4);
+                const firstPurchaseMonth = customer.firstPurchase.slice(5, 7);
+                const lastPurchaseMonth = customer.lastPurchase.slice(5, 7);
+
+                if (year && (firstPurchaseYear !== year || lastPurchaseYear !== year)) {
+                    return false;
+                }
+
+                if (month && (firstPurchaseMonth !== month || lastPurchaseMonth !== month)) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            // Sắp xếp khách hàng theo tổng tiền đã mua giảm dần và lấy 10 khách hàng đầu tiên
+            filteredCustomers.sort((a, b) => b.totalSpent - a.totalSpent);
+            filteredCustomers = filteredCustomers.slice(0, 10);
+
+            displayVipCustomers(filteredCustomers);
+        }
+
+        // Hiển thị danh sách khách hàng VIP ban đầu
+        displayVipCustomers(customerData.slice(0, 10).sort((a, b) => b.totalSpent - a.totalSpent));        
+    </script>
+</body>
+</html>
