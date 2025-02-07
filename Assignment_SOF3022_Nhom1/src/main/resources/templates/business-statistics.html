@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}">
+<head>
+    <title>Thống kê doanh thu theo loại hàng</title>
+    <style>
+        body {
+        font-family: sans-serif;
+        }
+
+		h1{
+		text-align:center;
+		}
+
+        #product-stats {
+            padding: 2px 5px;
+            
+        }
+
+        table thead tr th{
+        	background-color: #e74c3c !important;
+        	color:white !important;
+        	text-align: center;
+        }
+        
+        tbody td{
+        	border: #e74c3c 1px solid ;
+        }
+       tbody tr:nth-child(n+2) {
+    background-color: #fca89f ;
+}
+
+
+        .product-stat h2 {
+            margin-top: 0;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <h1>Thống kê doanh thu theo loại hàng</h1>
+    <div id="product-stats">
+    <table border="1" class="table">
+                    <thead>
+                        <tr>
+                            <th>Tên loại hàng</th>
+                            <th>Tổng doanh thu</th>
+                            <th>Tổng số lượng</th>
+                            <th>Giá cao nhất</th>
+                            <th>Giá thấp nhất</th>
+                            <th>Giá trung bình</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                    </tbody>
+                    </table>
+        </div>
+    <script>
+    const productData = {
+        "Đồng hồ": {
+            "Casio": [
+                { name: "Casio A158WA-1", price: 800000, quantity: 50, gender: "Unisex" },
+                { name: "Casio G-Shock GA-110", price: 3500000, quantity: 30, gender: "Nam" },
+                // ... Các sản phẩm khác của Casio
+            ],
+            "Seiko": [
+                { name: "Seiko 5 Automatic SNK809", price: 2500000, quantity: 40, gender: "Nam" },
+                { name: "Seiko Presage SRPB41J1", price: 8000000, quantity: 20, gender: "Nam" },
+                // ... Các sản phẩm khác của Seiko
+            ],
+            "Rolex": [
+                { name: "Rolex Submariner", price: 200000000, quantity: 5, gender: "Nam" },
+                { name: "Rolex Datejust", price: 150000000, quantity: 10, gender: "Nữ" },
+                // ... Các sản phẩm khác của Rolex
+            ],
+            "Versace": [
+                { name: "Versace V-Race GMT", price: 5000000, quantity: 5, gender: "Nam" },
+                { name: "Versace Urban Chrono", price: 6500000, quantity: 3, gender: "Nam" },
+                // ... Các sản phẩm khác của Versace
+            ],
+            "Julius": [
+                { name: "Julius JS-001", price: 1500000, quantity: 10, gender: "Nam" },
+                { name: "Julius JL-001", price: 1400000, quantity: 12, gender: "Nữ" },
+                // ... Các sản phẩm khác của Julius
+            ],
+            "Gucci": [
+                { name: "Gucci G-Timeless", price: 15000000, quantity: 7, gender: "Nữ" },
+                { name: "Gucci Dive", price: 20000000, quantity: 3, gender: "Nam" },
+                // ... Các sản phẩm khác của Gucci
+            ],
+            // ... Thêm các thương hiệu đồng hồ khác
+        },
+        // ... Các loại hàng khác (nếu có)
+    };
+
+
+        function calculateStats(products) {
+            let totalRevenue = 0;
+            let totalQuantity = 0;
+            let highestPrice = 0;
+            let lowestPrice = Infinity;
+            let totalPrice = 0;
+
+            for (const product of products) {
+                totalRevenue += product.price * product.quantity;
+                totalQuantity += product.quantity;
+                highestPrice = Math.max(highestPrice, product.price);
+                lowestPrice = Math.min(lowestPrice, product.price);
+                totalPrice += product.price;
+            }
+
+            const averagePrice = totalPrice / products.length || 0;
+
+            return {
+                totalRevenue,
+                totalQuantity,
+                highestPrice,
+                lowestPrice,
+                averagePrice
+            };
+        }
+
+        const productStats = document.getElementById('table');
+
+        function displayStats(products, brandName) {
+            const stats = calculateStats(products);
+            const statDiv = document.createElement('tr');
+            statDiv.classList.add('product-stat');
+            
+            statDiv.innerHTML = `
+                            <td>${brandName}</td>
+                            <td>${stats.totalRevenue.toLocaleString()} VNĐ</td>
+                            <td>${stats.totalQuantity}</td>
+                            <td>${stats.highestPrice.toLocaleString()} VNĐ</td>
+                            <td>${stats.lowestPrice.toLocaleString()} VNĐ</td>
+                            <td>${stats.averagePrice.toLocaleString()} VNĐ</td>
+                       
+            `;
+
+            productStats.appendChild(statDiv);
+        }
+
+        // Sự kiện khi checkbox 
+        const brandCheckboxes = document.querySelectorAll('.sidebar-widget.category input[type="checkbox"]');
+        const genderCheckboxes = document.querySelectorAll('.sidebar-widget.gender input[type="checkbox"]');
+
+        brandCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const selectedBrands = Array.from(brandCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+                const selectedGenders = Array.from(genderCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+
+                const selectedBrand = selectedBrands.length > 0 ? selectedBrands[0] : null; // Lấy thương hiệu được chọn (chỉ lấy 1)
+                const selectedGender = selectedGenders.length > 0 ? selectedGenders[0] : null; // Lấy giới tính được chọn (chỉ lấy 1)
+
+                const filteredProducts = filterProducts(selectedBrand, selectedGender);
+                displayStats(filteredProducts);
+            });
+        });
+
+        genderCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const selectedBrands = Array.from(brandCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+                const selectedGenders = Array.from(genderCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+
+                const selectedBrand = selectedBrands.length > 0 ? selectedBrands[0] : null; // Lấy thương hiệu được chọn (chỉ lấy 1)
+                const selectedGender = selectedGenders.length > 0 ? selectedGenders[0] : null; // Lấy giới tính được chọn (chỉ lấy 1)
+
+                const filteredProducts = filterProducts(selectedBrand, selectedGender);
+                displayStats(filteredProducts);
+            });
+        });
+
+        // Hiển thị thống kê ban đầu khi trang web được tải
+    for (const brand in productData["Đồng hồ"]) { // Duyệt qua từng thương hiệu
+        displayStats(productData["Đồng hồ"][brand], brand); // Hiển thị cho từng thương hiệu
+    }
+    
+    </script>
+</body>
+</html>

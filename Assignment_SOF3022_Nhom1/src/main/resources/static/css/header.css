@@ -11,7 +11,8 @@
   font-weight: 600;
   letter-spacing: 1.2px;
   color: #000 !important;
-  padding: 8px 16px !important;
+  /* padding: 8px 16px !important;*/
+  padding: 8px 8px !important; /*sửa tạm thời*/
   margin: 0 4px;
   transition: all 0.3s ease;
   position: relative;
@@ -85,3 +86,18 @@
     margin: 0 4px;
   }
 }
+/* Hover dropdown menu */
+      .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0; /* Để menu không bị lệch xuống khi hover */
+      }
+
+      /* Optional: để dropdown-menu không bị ẩn khi di chuột vào */
+      .dropdown-menu {
+        display: none;
+      }
+
+      .dropdown-item:hover {
+        background-color: #e74c3c; /* Màu nền khi hover vào item */
+        color: white; /* Màu chữ khi hover */
+      }
