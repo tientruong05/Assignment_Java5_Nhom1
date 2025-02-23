@@ -274,15 +274,15 @@
       .active.carousel-item-start {
         transform: translateX(-100%);
       }
-      
-      .product{
-      	text-decoration: none;
-      	color: black;
+
+      .product {
+        text-decoration: none;
+        color: black;
       }
-      
-      .product:hover{
-      	color: #e74c3c;
-      	text-decoration: underline;
+
+      .product:hover {
+        color: #e74c3c;
+        text-decoration: underline;
       }
     </style>
 
@@ -396,7 +396,11 @@
                 />
               </div>
               <div class="card-body text-center">
-                <h3 class="product-title"><a class="product" href="/java5/asm/product-detail">Watch Name</a></h3>
+                <h3 class="product-title">
+                  <a class="product" href="/java5/asm/product-detail"
+                    >Watch Name</a
+                  >
+                </h3>
                 <p class="price">$999</p>
                 <button class="btn btn-shop add-to-cart">Thêm vào giỏ</button>
               </div>
@@ -513,7 +517,6 @@
     </section>
 
     <div th:replace="fragments/footer :: footer"></div>
-
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {

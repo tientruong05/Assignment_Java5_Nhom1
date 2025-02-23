@@ -12,9 +12,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
       rel="stylesheet"
     />
-    <style>
-      
-    </style>
   </head>
   <body>
     <!-- Header (Menu Ngang) -->
@@ -34,15 +31,44 @@
             <nav class="text-center">
               <ul class="nav justify-content-center">
                 <li class="nav-item">
-                  <a href="/java5/asm/" class="nav-link text-uppercase">Trang Chủ</a>
+                  <a href="/java5/asm/" class="nav-link text-uppercase"
+                    >Trang Chủ</a
+                  >
+                </li>
+                <!-- Thay thế phần menu đồng hồ hiện tại bằng code sau -->
+                <li class="nav-item dropdown watch-menu">
+                  <a
+                    href="/java5/asm/list-product"
+                    class="nav-link text-uppercase dropdown-toggle"
+                  >
+                    Đồng hồ
+                  </a>
+                  <div class="watch-submenu">
+                    <div
+                      th:each="category : ${watchCategories}"
+                      class="category-section"
+                    >
+                      <h6 class="dropdown-header" th:text="${category.key}">
+                        Loại đồng hồ
+                      </h6>
+                      <div th:each="subCategory : ${category.value}">
+                        <a
+                          class="dropdown-item"
+                          th:href="@{/java5/asm/list-product(category=${subCategory.id})}"
+                          th:text="${subCategory.subCategoriesName}"
+                        >
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </li>
                 <li class="nav-item">
-                  <a href="/java5/asm/list-product" class="nav-link text-uppercase">Versace</a>
+                  <a href="#" class="nav-link text-uppercase">Versace</a>
                 </li>
                 <!-- Dropdown Menu -->
                 <li class="nav-item dropdown">
                   <a
-                    class="nav-link  text-uppercase"
+                    class="nav-link text-uppercase"
                     href="#"
                     id="navbarDropdown"
                     role="button"
@@ -51,17 +77,33 @@
                     Quản lý
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/java5/asm/crud/categories">QL thể loại</a></li>
-                    <li><a class="dropdown-item" href="/java5/asm/crud/orders">QL đơn hàng</a></li>
-                    <li><a class="dropdown-item" href="/java5/asm/crud/products">QL mặt hàng</a></li>
-                    <li><a class="dropdown-item" href="/java5/asm/crud/users">QL người dùng</a></li>
+                    <li>
+                      <a class="dropdown-item" href="/java5/asm/crud/categories"
+                        >QL thể loại</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/java5/asm/crud/orders"
+                        >QL đơn hàng</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/java5/asm/crud/products"
+                        >QL mặt hàng</a
+                      >
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="/java5/asm/crud/users"
+                        >QL người dùng</a
+                      >
+                    </li>
                   </ul>
                 </li>
-                
+
                 <!-- Dropdown Menu -->
                 <li class="nav-item dropdown">
                   <a
-                    class="nav-link  text-uppercase"
+                    class="nav-link text-uppercase"
                     href="#"
                     id="navbarDropdown"
                     role="button"
@@ -71,22 +113,30 @@
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li class="nav-item">
-                  <a class="dropdown-item" href="/java5/asm/users/change-pw" >Đổi mật khẩu</a>
-                </li>
-                
-                <li class="nav-item">
-                  <a class="dropdown-item" href="/java5/asm/users/shopping-history" >Lịch sử mua sắm</a>
-                </li>
-                <li class="nav-item">
-                  <a class="dropdown-item" href="/java5/asm/users/profile" >Thông tin tài khoản</a>
-                </li>
+                      <a class="dropdown-item" href="/java5/asm/users/change-pw"
+                        >Đổi mật khẩu</a
+                      >
+                    </li>
+
+                    <li class="nav-item">
+                      <a
+                        class="dropdown-item"
+                        href="/java5/asm/users/shopping-history"
+                        >Lịch sử mua sắm</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="/java5/asm/users/profile"
+                        >Thông tin tài khoản</a
+                      >
+                    </li>
                   </ul>
                 </li>
-                
-                 <!-- Dropdown Menu -->
+
+                <!-- Dropdown Menu -->
                 <li class="nav-item dropdown">
                   <a
-                    class="nav-link  text-uppercase"
+                    class="nav-link text-uppercase"
                     href="#"
                     id="navbarDropdown"
                     role="button"
@@ -95,19 +145,34 @@
                     Thống kê
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/java5/asm/statistics/business">Doanh thu</a></li>
-                    <li><a class="dropdown-item" href="/java5/asm/statistics/customers">Khách hàng</a></li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="/java5/asm/statistics/business"
+                        >Doanh thu</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        href="/java5/asm/statistics/customers"
+                        >Khách hàng</a
+                      >
+                    </li>
                     <!-- <li><a class="dropdown-item" href="/java5/asm/crud/products">QL mặt hàng</a></li>
                     <li><a class="dropdown-item" href="/java5/asm/crud/users">QL người dùng</a></li> -->
                   </ul>
                 </li>
-                
               </ul>
             </nav>
           </div>
           <div class="col-lg-2 col-md-2 col-8 text-end">
-            <a href="/search" class="header-icon"><i class="bi bi-search"></i></a>
-            <a href="/java5/asm/login" class="header-icon"><i class="bi bi-person"></i></a>
+            <a href="/search" class="header-icon"
+              ><i class="bi bi-search"></i
+            ></a>
+            <a href="/java5/asm/login" class="header-icon"
+              ><i class="bi bi-person"></i
+            ></a>
             <a href="/java5/asm/cart" class="header-icon position-relative">
               <i class="bi bi-bag"></i>
               <span

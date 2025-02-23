@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html
+  th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}"
+  lang="en"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+        color: #212529;
+        font-family: "Arial", sans-serif;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        padding: 40px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .product-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+
+      .product-code {
+        color: #6c757d;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .product-price {
+        font-size: 32px;
+        color: #1a1a1a;
+        font-weight: 600;
+        margin: 20px 0;
+      }
+
+      .original-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 20px;
+        margin-left: 12px;
+      }
+
+      .product-info {
+        line-height: 2;
+        margin-bottom: 12px;
+        color: #4a4a4a;
+      }
+
+      .product-info strong {
+        color: #1a1a1a;
+        width: 120px;
+        display: inline-block;
+      }
+
+      .btn-buy {
+        background-color: #1a1a1a;
+        color: white;
+        padding: 12px 35px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-buy:hover {
+        background-color: #333;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .btn-cart {
+        background-color: white;
+        color: #1a1a1a;
+        border: 2px solid #1a1a1a;
+        padding: 12px 35px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-cart:hover {
+        background-color: #f8f9fa;
+        color: #1a1a1a;
+      }
+
+      .rating-stars {
+        color: #1a1a1a;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .product-image {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .related-products {
+        margin-top: 60px;
+        padding-top: 40px;
+        border-top: 1px solid #eee;
+      }
+
+      .related-products h4 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 30px;
+      }
+
+      .related-product-item {
+        padding: 15px;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+      }
+
+      .related-product-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .related-product-item img {
+        border-radius: 6px;
+        margin-bottom: 12px;
+      }
+
+      .related-product-price {
+        font-weight: 600;
+        color: #1a1a1a;
+        font-size: 16px;
+      }
+
+      .delivery-info {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 30px;
+      }
+
+      .social-share {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+      }
+
+      .social-share a {
+        color: #1a1a1a;
+        margin-right: 15px;
+        font-size: 18px;
+        text-decoration: none;
+      }
+
+      .social-share a:hover {
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="product-image">
+            <img
+              th:src="@{'/photos/' + ${product.image}}"
+              th:alt="${product.name}"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h1 class="product-title" th:text="${product.name}">
+            Đồng Hồ Nam SevenFriday Urban Explorer Automatic
+          </h1>
+          <p class="product-code" th:text="'Mã SP: ' + ${product.id}">
+            Mã SP: H118496
+          </p>
+
+          <p class="product-price">
+            <span
+              th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"
+              >17,500,000</span
+            >
+            đ
+          </p>
+
+          <div class="product-info">
+            <p>
+              <strong>Số lượng còn:</strong>
+              <span th:text="${product.qty}"></span>
+            </p>
+            <p>
+              <strong>Mô tả:</strong>
+              <span th:text="${product.description}"></span>
+            </p>
+            <p>
+              <strong>Trạng thái:</strong>
+              <span
+                th:text="${product.status == 1 ? 'Còn hàng' : 'Hết hàng'}"
+              ></span>
+            </p>
+          </div>
+
+          <div class="d-flex gap-3 mt-4">
+            <button class="btn btn-buy">Mua ngay</button>
+            <button class="btn btn-cart">Thêm vào giỏ</button>
+          </div>
+
+          <div class="delivery-info">
+            <p class="mb-2">
+              <strong>Giao hàng:</strong> Freeship Hà Nội & HCM
+            </p>
+            <p class="mb-0"><strong>Hotline:</strong> 093.934.8888</p>
+          </div>
+
+          <div class="social-share">
+            <span class="text-muted">Chia sẻ:</span>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-twitter"></i></a>
+            <a href="#"><i class="bi bi-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="related-products">
+        <h4>Đề xuất sản phẩm lựa chọn khác</h4>
+        <div class="row">
+          <div class="col-md-2" th:each="related : ${relatedProducts}">
+            <div class="related-product-item">
+              <a th:href="@{'/products/detail/' + ${related.id}}">
+                <img
+                  th:src="@{'/photos/' + ${related.image}}"
+                  th:alt="${related.name}"
+                  class="img-fluid"
+                />
+                <p class="related-product-price text-center">
+                  <span
+                    th:text="${#numbers.formatDecimal(related.price, 0, 'COMMA', 0, 'POINT')}"
+                    >24,950,000</span
+                  >
+                  đ
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
