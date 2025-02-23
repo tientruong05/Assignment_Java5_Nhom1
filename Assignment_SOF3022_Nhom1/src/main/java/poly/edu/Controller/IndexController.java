@@ -1,4 +1,4 @@
-package poly.edu.Controller;
+package poly.edu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

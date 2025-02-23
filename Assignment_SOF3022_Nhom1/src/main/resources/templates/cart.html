@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}" lang="en">
+<html
+  th:replace="~{/layout::view(~{::title}, ~{::body}, ~{::style})}"
+  lang="en"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -191,196 +194,176 @@
           <div class="cart-container">
             <div class="cart-header">
               <div class="row align-items-center">
-                <div class="col">
-                  <input type="checkbox" class="form-check-input me-2" />
-                  <span>Chọn tất cả</span>
-                </div>
+                <div class="col">Sản phẩm</div>
                 <div class="col text-center">Số lượng</div>
                 <div class="col text-end">Thành tiền</div>
               </div>
             </div>
 
-            <!-- Cart Item 1 -->
-            <div class="cart-item">
-              <div class="row align-items-center">
-                <div class="col-auto">
-                  <input type="checkbox" class="form-check-input" />
-                </div>
-                <div class="col-auto">
-                  <img
-                    src="https://www.watchstore.vn/images/products/others/2024/large/nh8350-59l-1-834858534-969399190-1712554639.webp"
-                    class="product-image"
-                    alt="Watch"
-                  />
-                </div>
-                <div class="col">
-                  <h5 class="product-title">
-                    Đồng Hồ Citizen - Nam NH8350-59L
-                  </h5>
-                </div>
-                <div class="col-auto">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-outline-secondary btn-quantity">
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      class="form-control quantity-input"
-                      value="1"
-                      min="1"
+            <!-- Cart Items -->
+            <div th:if="${cartItems != null and !cartItems.empty}">
+              <div
+                th:each="item : ${cartItems}"
+                class="cart-item"
+                th:data-item-id="${item.id}"
+              >
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <img
+                      th:src="${item.product.image}"
+                      class="product-image"
+                      alt="Watch"
                     />
-                    <button class="btn btn-outline-secondary btn-quantity">
-                      +
+                  </div>
+                  <div class="col">
+                    <h5 class="product-title" th:text="${item.product.name}">
+                      Watch Name
+                    </h5>
+                  </div>
+                  <div class="col-auto">
+                    <div class="d-flex align-items-center">
+                      <button
+                        class="btn btn-outline-secondary btn-quantity"
+                        onclick="updateQuantity(this, false)"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="number"
+                        class="form-control quantity-input"
+                        th:value="${item.qty}"
+                        min="1"
+                        onchange="updateCartItem(this)"
+                      />
+                      <button
+                        class="btn btn-outline-secondary btn-quantity"
+                        onclick="updateQuantity(this, true)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col text-end">
+                    <p
+                      class="product-price mb-2"
+                      th:text="${#numbers.formatDecimal(item.price * item.qty, 0, 'COMMA', 0, 'POINT') + 'đ'}"
+                    >
+                      0đ
+                    </p>
+                    <button
+                      class="btn-remove"
+                      th:onclick="'removeCartItem(' + ${item.id} + ')'"
+                    >
+                      <i class="fas fa-trash"></i> Xóa
                     </button>
                   </div>
-                </div>
-                <div class="col text-end">
-                  <p class="product-price mb-2">4.948.000đ</p>
-                  <button class="btn-remove">
-                    <i class="fas fa-trash"></i> Xóa
-                  </button>
                 </div>
               </div>
             </div>
 
-            <!-- Cart Item 2 -->
-            <div class="cart-item">
-              <div class="row align-items-center">
-                <div class="col-auto">
-                  <input type="checkbox" class="form-check-input" />
-                </div>
-                <div class="col-auto">
-                  <img
-                    src="https://www.watchstore.vn/images/products/others/2024/large/nh8350-59l-1-834858534-969399190-1712554639.webp"
-                    class="product-image"
-                    alt="Watch"
-                  />
-                </div>
-                <div class="col">
-                  <h5 class="product-title">
-                    Đồng Hồ Citizen - Nam NH8350-59L
-                  </h5>
-                </div>
-                <div class="col-auto">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-outline-secondary btn-quantity">
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      class="form-control quantity-input"
-                      value="1"
-                      min="1"
-                    />
-                    <button class="btn btn-outline-secondary btn-quantity">
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div class="col text-end">
-                  <p class="product-price mb-2">4.948.000đ</p>
-                  <button class="btn-remove">
-                    <i class="fas fa-trash"></i> Xóa
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Cart Item 3 -->
-            <div class="cart-item">
-              <div class="row align-items-center">
-                <div class="col-auto">
-                  <input type="checkbox" class="form-check-input" />
-                </div>
-                <div class="col-auto">
-                  <img
-                    src="https://www.watchstore.vn/images/products/others/2024/large/nh8350-59l-1-834858534-969399190-1712554639.webp"
-                    class="product-image"
-                    alt="Watch"
-                  />
-                </div>
-                <div class="col">
-                  <h5 class="product-title">
-                    Đồng Hồ Citizen - Nam NH8350-59L
-                  </h5>
-                </div>
-                <div class="col-auto">
-                  <div class="d-flex align-items-center">
-                    <button class="btn btn-outline-secondary btn-quantity">
-                      -
-                    </button>
-                    <input
-                      type="number"
-                      class="form-control quantity-input"
-                      value="1"
-                      min="1"
-                    />
-                    <button class="btn btn-outline-secondary btn-quantity">
-                      +
-                    </button>
-                  </div>
-                </div>
-                <div class="col text-end">
-                  <p class="product-price mb-2">4.948.000đ</p>
-                  <button class="btn-remove">
-                    <i class="fas fa-trash"></i> Xóa
-                  </button>
-                </div>
-              </div>
+            <div
+              th:if="${cartItems == null or cartItems.empty}"
+              class="text-center py-5"
+            >
+              <p>Giỏ hàng trống</p>
+              <a href="/java5/asm/list-product" class="btn btn-primary"
+                >Tiếp tục mua sắm</a
+              >
             </div>
           </div>
         </div>
 
         <!-- Tổng kết đơn hàng -->
-        <div class="col-lg-4">
+        <div class="col-lg-4" th:if="${cartItems != null and !cartItems.empty}">
           <div class="summary-card">
             <h4 class="mb-4">Tổng đơn hàng</h4>
 
             <div class="summary-item">
               <span>Tạm tính:</span>
-              <span class="product-price">9.896.000đ</span>
+              <span
+                class="product-price"
+                th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT') + 'đ'}"
+                >0đ</span
+              >
             </div>
 
             <div class="summary-item">
               <span>Phí vận chuyển:</span>
-              <span class="product-price">30.000đ</span>
-            </div>
-
-            <div class="summary-item">
-              <span>Giảm giá:</span>
-              <span class="product-price">-500.000đ</span>
-            </div>
-
-            <div class="coupon-section mb-3">
-              <p class="mb-2">Mã giảm giá</p>
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Nhập mã giảm giá"
-                />
-                <button class="btn btn-outline-primary">Áp dụng</button>
-              </div>
+              <span
+                class="product-price"
+                th:text="${#numbers.formatDecimal(shippingFee, 0, 'COMMA', 0, 'POINT') + 'đ'}"
+                >0đ</span
+              >
             </div>
 
             <hr />
 
             <div class="summary-item">
               <strong>Tổng cộng:</strong>
-              <span class="product-price h4" style="font-weight: bold"
-                >9.426.000đ</span
+              <span
+                class="product-price h4"
+                style="font-weight: bold"
+                th:text="${#numbers.formatDecimal(total + shippingFee, 0, 'COMMA', 0, 'POINT') + 'đ'}"
+                >0đ</span
               >
             </div>
 
-            <button class="btn-checkout mt-3" onclick="window.location.href='/java5/asm/payment'">
-  <i class="fas fa-lock me-2"></i>Thanh toán
-</button>
-
+            <button
+              class="btn-checkout mt-3"
+              onclick="window.location.href='/java5/asm/payment'"
+            >
+              <i class="fas fa-lock me-2"></i>Thanh toán
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function updateQuantity(button, isIncrement) {
+        const input = button.parentElement.querySelector(".quantity-input");
+        const itemId = button.closest(".cart-item").dataset.itemId;
+        let quantity = parseInt(input.value);
+
+        if (isIncrement) {
+          quantity++;
+        } else if (quantity > 1) {
+          quantity--;
+        }
+
+        updateCartItem(itemId, quantity);
+      }
+
+      function updateCartItem(itemId, quantity) {
+        fetch("/java5/asm/cart/update", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: `itemId=${itemId}&quantity=${quantity}`,
+        })
+          .then((response) => response.text())
+          .then((result) => {
+            if (result === "success") {
+              location.reload();
+            }
+          });
+      }
+
+      function removeCartItem(itemId) {
+        if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
+          fetch(`/java5/asm/cart/remove/${itemId}`, {
+            method: "POST",
+          })
+            .then((response) => response.text())
+            .then((result) => {
+              if (result === "success") {
+                location.reload();
+              }
+            });
+        }
+      }
+    </script>
   </body>
 </html>
