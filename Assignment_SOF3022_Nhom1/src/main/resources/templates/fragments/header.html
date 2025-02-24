@@ -54,7 +54,7 @@
                       <div th:each="subCategory : ${category.value}">
                         <a
                           class="dropdown-item"
-                          th:href="@{/java5/asm/list-product(category=${subCategory.id})}"
+                          th:href="@{/java5/asm/category(subCategoryId=${subCategory.id})}"
                           th:text="${subCategory.subCategoriesName}"
                         >
                         </a>

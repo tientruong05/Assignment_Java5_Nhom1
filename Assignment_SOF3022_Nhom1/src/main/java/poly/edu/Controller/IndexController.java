@@ -37,12 +37,6 @@ public class IndexController {
         return "login-register"; // Không cần .html nếu dùng Thymeleaf
     }
 
-
-    @RequestMapping("/list-product")
-    public String listProduct() {
-    	return "/list-product.html";
-    }
-
     @RequestMapping("/crud/categories")
     public String crudCategories() {
     	return "/crud_categories.html";
