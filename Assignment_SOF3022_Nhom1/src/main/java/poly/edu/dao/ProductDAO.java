@@ -15,6 +15,8 @@ public interface ProductDAO {
     void save(ProductEntity product);
     void update(ProductEntity product);
     void delete(int id);
+    List<ProductEntity> findBySubCategoryId(int subCategoryId);
+    List<ProductEntity> findByCategoryId(int categoryId);
 }
 
 @Transactional
@@ -57,5 +59,23 @@ class ProductDAOImpl implements ProductDAO {
         if (product != null) {
             entityManager.remove(product);
         }
+    }
+
+    @Override
+    public List<ProductEntity> findBySubCategoryId(int subCategoryId) {
+        return entityManager.createQuery(
+            "SELECT p FROM ProductEntity p WHERE p.subCategory.id = :subCategoryId", 
+            ProductEntity.class)
+            .setParameter("subCategoryId", subCategoryId)
+            .getResultList();
+    }
+
+    @Override
+    public List<ProductEntity> findByCategoryId(int categoryId) {
+        return entityManager.createQuery(
+            "SELECT p FROM ProductEntity p WHERE p.subCategory.category.id = :categoryId", 
+            ProductEntity.class)
+            .setParameter("categoryId", categoryId)
+            .getResultList();
     }
 }
